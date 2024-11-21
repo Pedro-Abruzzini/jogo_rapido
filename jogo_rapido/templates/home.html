@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Quadras Disponíveis{% endblock %}
+
+{% block content %}
+<div class="quadras-container">
+    <h2>Quadras Disponíveis</h2>
+    <div class="quadras-list">
+        {% for quadra in quadrasgeral %}
+            <div class="quadra-card">
+                <img src="{{ quadra.imagem }}" alt="Imagem da Quadra" class="quadra-img">
+                <div class="quadra-info">
+                    <p><strong>Modalidade:</strong> {{ quadra.esporte }}</p>
+                    <p><strong>Localização:</strong> {{ quadra.localizacao }}</p>
+                    <p><strong>Qualidade:</strong> {{ quadra.get_qualidade_display }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
