@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login_usuario),
     path('cadastro_usuario/',views.cadastro_usuario),
-    path('', views.filter_items, name='filter_items'),  # Página principal com filtro
+    path('filtro_items/', views.filter_items, name='filter_items'),  # Página principal com filtro
     path('add-to-favorites/<int:item_id>/', views.add_to_favorites, name='add_to_favorites'),
     path('quadra/<int:quadra_id>/', views.detalhes_quadra, name='detalhes_quadra'),
 ]
