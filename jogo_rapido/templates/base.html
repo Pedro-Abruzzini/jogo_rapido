@@ -14,15 +14,6 @@
                 <img src="{% static 'logojogorapido.png' %}" alt="Logo" class="logo-img">
                 <h1 class="project-name">Jogo Rápido</h1>
             </div>
-            <div class="search-button-container">
-                <input 
-                    type="text" 
-                    placeholder="Digite sua busca..." 
-                    class="search-input" 
-                    id="searchInput">
-                <button class="search-button" onclick="performSearch()"> Buscar</button>
-            </div>
-            
             <nav class="nav-links">
                 <a href="#"><span>❤️</span> Favoritos</a>
                 <a href='/login'>👤Perfil</a>
@@ -31,45 +22,50 @@
         </div>
     </header>
 
-    <main class="content">
-        <div class="filter-container">
-            <h1>Filtrar Resultados</h1>
-            <div class="filter-buttons">
-                <!-- Formulário para cada filtro -->
-                <form method="get" action="">
-                    <button type="submit" name="filter" value="futebol" {% if selected_filter == 'futebol' %}class="active"{% endif %}>
-                        Futebol
-                    </button>
-                    <button type="submit" name="filter" value="basquete" {% if selected_filter == 'basquete' %}class="active"{% endif %}>
-                        Basquete
-                    </button>
-                    <button type="submit" name="filter" value="volei" {% if selected_filter == 'volei' %}class="active"{% endif %}>
-                        Vôlei
-                    </button>
-                    <button type="submit" name="filter" value="todos" {% if selected_filter == 'todos' %}class="active"{% endif %}>
-                        Todos
-                    </button>
-                </form>
-            </div>
 
-            <div class="filter-results">
-                {% if items %}
-                    {% for item in items %}
-                        <div class="result-item">
-                            <span>{{ item.name }}</span>
-                            <!-- Formulário para favoritar o item -->
-                            <form method="post" action="{% url 'add_to_favorites' item.id %}">
-                                {% csrf_token %}
-                                <button type="submit">❤️ Favoritar</button>
-                            </form>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>Nenhum item encontrado.</p>
-                {% endif %}
+    <main class="content">
+       
+
+            <div class="filter-container">
+                <h1>Filtrar Resultados</h1>
+                <div class="filter-buttons">
+                    <form method="get" action="">
+                        <button type="submit" name="filter" value="futebol" {% if selected_filter == 'futebol' %}class="active"{% endif %}>
+                            Futebol
+                        </button>
+                        <button type="submit" name="filter" value="basquete" {% if selected_filter == 'basquete' %}class="active"{% endif %}>
+                            Basquete
+                        </button>
+                        <button type="submit" name="filter" value="volei" {% if selected_filter == 'volei' %}class="active"{% endif %}>
+                            Vôlei
+                        </button>
+                        <button type="submit" name="filter" value="todos" {% if selected_filter == 'todos' %}class="active"{% endif %}>
+                            Todos
+                        </button>
+                    </form>
+                </div>
+
+                <div class="filter-results">
+                    {% if items %}
+                        {% for item in items %}
+                            <div class="result-item">
+                                <span>{{ item.name }}</span>
+                                
+                                <form method="post" action="{% url 'add_to_favorites' item.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit">❤️ Favoritar</button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Nenhum item encontrado.</p>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        
+         {% block content %}{% endblock %}
     </main>
+
 
     <footer class="footer">
         <p>Entre em contato: jogorapido@gmail.com | Twitter: @jogorapido | Telefone: +55 (21) 992357321</p>
