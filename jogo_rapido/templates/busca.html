@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Busca</title>
+    <title>Botão de Busca</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="search-container">
-        <h1>Busque Aqui</h1>
-        <form action="/resultados" method="GET">
-            <input 
-                type="text" 
-                name="query" 
-                placeholder="Digite sua pesquisa..." 
-                class="search-input">
-            <button type="submit" class="search-button">Buscar</button>
-        </form>
+    <div class="search-button-container">
+        <input 
+            type="text" 
+            placeholder="Digite sua busca..." 
+            class="search-input" 
+            id="searchInput">
+        <button class="search-button" onclick="performSearch()">🔍 Buscar</button>
     </div>
+
+    <script>
+        function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            if (query.trim()) {
+                alert(`Você buscou por: ${query}`);
+                // Aqui você pode redirecionar para outra página:
+                // window.location.href = `/resultados?query=${encodeURIComponent(query)}`;
+            } else {
+                alert('Por favor, insira um termo para buscar.');
+            }
+        }
+    </script>
 </body>
 </html>
