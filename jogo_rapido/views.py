@@ -68,3 +68,7 @@ def add_to_favorites(request, item_id):
 
     # Redireciona de volta para a página de filtro
     return redirect('filter_items')
+
+def detalhes_quadra(request, quadra_id):
+    quadra = QuadraGeral.objects.get(id=quadra_id)
+    return render(request, 'detalhes_quadra.html', context={'quadra': quadra})
