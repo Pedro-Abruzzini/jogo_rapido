@@ -17,10 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from jogo_rapido import views
+from . import views
 
 urlpatterns = [
     path('', views.home),
     path('admin/', admin.site.urls),
     path('login/', views.login_usuario),
     path('cadastro_usuario/',views.cadastro_usuario),
+]
+
+urlpatterns = [
+    path('', views.filter_items, name='filter_items'),  # Página principal com filtro
+    path('add-to-favorites/<int:item_id>/', views.add_to_favorites, name='add_to_favorites'),
 ]

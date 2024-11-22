@@ -11,4 +11,15 @@ class QuadraGeral (models.Model):
  'R': 'Ruim',
  'MR': 'Muito ruim'
   })
-  
+
+class Item(models.Model):
+    CATEGORY_CHOICES = [
+        ('futebol', 'Futebol'),
+        ('basquete', 'Basquete'),
+        ('volei', 'Vôlei'),
+    ]
+    name = models.CharField(max_length=100)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+
+    def __str__(self):
+        return self.name

@@ -22,11 +22,45 @@
         </div>
     </header>
 
-
     <main class="content">
-        {% block content %}{% endblock %}
-    </main>
+        <div class="filter-container">
+            <h1>Filtrar Resultados</h1>
+            <div class="filter-buttons">
+                <!-- Formulário para cada filtro -->
+                <form method="get" action="">
+                    <button type="submit" name="filter" value="futebol" {% if selected_filter == 'futebol' %}class="active"{% endif %}>
+                        Futebol
+                    </button>
+                    <button type="submit" name="filter" value="basquete" {% if selected_filter == 'basquete' %}class="active"{% endif %}>
+                        Basquete
+                    </button>
+                    <button type="submit" name="filter" value="volei" {% if selected_filter == 'volei' %}class="active"{% endif %}>
+                        Vôlei
+                    </button>
+                    <button type="submit" name="filter" value="todos" {% if selected_filter == 'todos' %}class="active"{% endif %}>
+                        Todos
+                    </button>
+                </form>
+            </div>
 
+            <div class="filter-results">
+                {% if items %}
+                    {% for item in items %}
+                        <div class="result-item">
+                            <span>{{ item.name }}</span>
+                            <!-- Formulário para favoritar o item -->
+                            <form method="post" action="{% url 'add_to_favorites' item.id %}">
+                                {% csrf_token %}
+                                <button type="submit">❤️ Favoritar</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Nenhum item encontrado.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
 
     <footer class="footer">
         <p>Entre em contato: jogorapido@gmail.com | Twitter: @jogorapido | Telefone: +55 (21) 992357321</p>
