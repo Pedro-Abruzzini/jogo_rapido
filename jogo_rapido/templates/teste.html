@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Jogo Rápido{% endblock %}</title>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="{% static 'logo.png' %}" alt="Logo" class="logo-img">
+                <h1 class="project-name">Jogo Rápido</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="#"><span>❤️</span> Favoritos</a>
+                <a href="#"><span>👤</span> Perfil</a>
+                <a href="#"><span>☰</span> Menu</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <p>Entre em contato: email@exemplo.com | Twitter: @exemplo</p>
+    </footer>
+</body>
+</html>

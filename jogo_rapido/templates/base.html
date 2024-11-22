@@ -22,14 +22,46 @@
         </div>
     </header>
 
-
     <main class="content">
-        {% block content %}{% endblock %}
+        <div class="filter-container">
+            <h1>Filtrar Resultados</h1>
+            <div class="filter-buttons">
+                <button class="filter-button" data-filter="futebol">Futebol</button>
+                <button class="filter-button" data-filter="basquete">Basquete</button>
+                <button class="filter-button" data-filter="vôlei">Vôlei</button>
+                <button class="filter-button" data-filter="todos">Todos</button>
+            </div>
+            <div class="filter-results">
+                <div class="result-item" data-category="futebol">Jogo de Futebol</div>
+                <div class="result-item" data-category="basquete">Partida de Basquete</div>
+                <div class="result-item" data-category="vôlei">Torneio de Vôlei</div>
+                <div class="result-item" data-category="futebol">Treino de Futebol</div>
+                <div class="result-item" data-category="vôlei">Campeonato de Vôlei</div>
+            </div>
+        </div>
     </main>
-
 
     <footer class="footer">
         <p>Entre em contato: jogorapido@gmail.com | Twitter: @jogorapido | Telefone: +55 (21) 992357321</p>
     </footer>
+
+    <script>
+        // Script para aplicar o filtro
+        const buttons = document.querySelectorAll('.filter-button');
+        const items = document.querySelectorAll('.result-item');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+                items.forEach(item => {
+                    if (filter === 'todos' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
