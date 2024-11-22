@@ -7,6 +7,8 @@ version = "0.1.0"
 Django = "^5.0"
 python = "^3.10"
 [tool.poetry.dev-dependencies]
+package-mode = false
+
 
 [tool.pyright]
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md

@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}Detalhes da Quadra{% endblock %}
+{% block title %}{{ quadra.esporte }} - Detalhes{% endblock %}
 
 {% block content %}
 <div class="detalhes-quadra-container">
     <div class="detalhes-quadra">
         <div class="detalhes-info">
-            <h2>Clube Federal <span>★★★★★</span></h2>
-            <p><strong>Modalidade:</strong> Futebol</p>
-            <p><strong>Localização:</strong> Clube Federal, Alto Leblon</p>
-            <p><strong>Qualidade:</strong> Boa</p>
+            <h2>{{ quadra.localizacao }} <span>★★★★★</span></h2>
+            <p><strong>Modalidade:</strong> {{ quadra.esporte }}</p>
+            <p><strong>Localização:</strong> {{ quadra.localizacao }}</p>
+            <p><strong>Qualidade:</strong> {{ quadra.qualidade }}</p>
             <p><strong>Valor:</strong> $$$</p>
             <p><strong>Funcionamento:</strong> seg-dom, 7:00-21:00</p>
             <p><strong>Avaliação:</strong> ★★★★★</p>
             <button class="comentario-button">Adicionar comentário</button>
         </div>
         <div class="detalhes-image">
-            <img src="{% static 'example_court_image.jpg' %}" alt="Imagem da Quadra">
+            <img src="{{ quadra.imagem }}" alt="Imagem da Quadra">
         </div>
     </div>
     <div class="detalhes-actions">

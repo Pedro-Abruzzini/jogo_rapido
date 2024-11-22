@@ -70,5 +70,8 @@ def add_to_favorites(request, item_id):
     return redirect('filter_items')
 
 def detalhes_quadra(request, quadra_id):
-    quadra = QuadraGeral.objects.get(id=quadra_id)
+    try:
+        quadra = QuadraGeral.objects.get(id=quadra_id)
+    except QuadraGeral.DoesNotExist:
+        return redirect('home')  # Redireciona para a página inicial se a quadra não existir
     return render(request, 'detalhes_quadra.html', context={'quadra': quadra})
