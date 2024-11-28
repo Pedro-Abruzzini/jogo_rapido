@@ -28,6 +28,7 @@ urlpatterns = [
     path('filtro_items/', views.filter_items, name='filter_items'),  # Página principal com filtro
     path('add-to-favorites/<int:item_id>/', views.add_to_favorites, name='add_to_favorites'),
     path('quadra/<int:quadra_id>/', views.detalhes_quadra, name='detalhes_quadra'),
+    path('quadra/<int:quadra_id>/adicionar_comentario/', views.adicionar_comentario, name='adicionar_comentario'),
 ]
 
 

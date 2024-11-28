@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.timezone import now
+from django.contrib.auth.models import User
 
 class QuadraGeral (models.Model):
   imagem = models.URLField(max_length=1000)
@@ -26,3 +28,13 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+class Comentario(models.Model):
+    quadra = models.ForeignKey(QuadraGeral, on_delete=models.CASCADE, related_name='comentarios')
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)  
+    texto = models.TextField()
+    estrelas = models.IntegerField(choices=[(i, f"{i} estrelas") for i in range(1, 6)])
+    data_criacao = models.DateTimeField(default=now) 
+
+    def __str__(self):
+        return f"Comentário de {self.autor.username} - {self.quadra.localizacao} ({self.estrelas} estrelas)"

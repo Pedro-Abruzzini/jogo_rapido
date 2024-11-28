@@ -277,3 +277,28 @@ body {
 .reservar-button:hover {
   background-color: #2e7d32;
 }
+.detalhes-comentarios {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comentario {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.comentario:last-child {
+  border-bottom: none;
+}
+
+.comentario p {
+  margin: 5px 0;
+}
+
+.comentario strong {
+  color: #3a5a40;
+}

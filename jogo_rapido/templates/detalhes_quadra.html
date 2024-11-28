@@ -13,7 +13,7 @@
             <p><strong>Valor:</strong> $$$</p>
             <p><strong>Funcionamento:</strong> seg-dom, 7:00-21:00</p>
             <p><strong>Avaliação:</strong> ★★★★★</p>
-            <button class="comentario-button">Adicionar comentário</button>
+            <button href="{% url 'adicionar_comentario' quadra.id %}"class="comentario-button">Adicionar comentário</button>
         </div>
         <div class="detalhes-image">
             <img src="{{ quadra.imagem }}" alt="Imagem da Quadra">
@@ -21,6 +21,18 @@
     </div>
     <div class="detalhes-actions">
         <button class="reservar-button">Reservar agora</button>
+    </div>
+    <div class="detalhes-comentarios">
+        <h3>Comentários</h3>
+        {% for comentario in quadra.comentarios.all %}
+            <div class="comentario">
+                <p><strong>{{ comentario.autor.username }}</strong> - {{ comentario.data_criacao|date:"d/m/Y H:i" }}</p>
+                <p>{{ comentario.texto }}</p>
+                <p>Avaliação: {{ comentario.estrelas }} ★</p>
+            </div>
+        {% empty %}
+            <p>Sem comentários ainda. Seja o primeiro a comentar!</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

@@ -3,12 +3,10 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .models import QuadraGeral, Item
-from .forms import NovoUsuarioForm
+from .forms import NovoUsuarioForm,ComentarioForm
 from django.http import JsonResponse
 
 
-def inicio(request):
- return render(request, 'inicio.html')
 
 def cadastro_usuario(request):
  formulario = NovoUsuarioForm()
@@ -75,3 +73,28 @@ def detalhes_quadra(request, quadra_id):
     except QuadraGeral.DoesNotExist:
         return redirect('home')  # Redireciona para a página inicial se a quadra não existir
     return render(request, 'detalhes_quadra.html', context={'quadra': quadra})
+
+def favoritos(request):
+    favoritos_ids = request.session.get('favorites', [])
+    favoritos = QuadraGeral.objects.filter(id__in=favoritos_ids)
+    return render(request, 'favoritos.html', context={'favoritos': favoritos})
+
+@login_required
+def adicionar_comentario(request, quadra_id):
+    try:
+        quadra = QuadraGeral.objects.get(id=quadra_id)
+    except QuadraGeral.DoesNotExist:
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.quadra = quadra
+            comentario.autor = request.user  # Associa o autor ao usuário logado
+            comentario.save()
+            return redirect('detalhes_quadra', quadra_id=quadra_id)
+    else:
+        form = ComentarioForm()
+
+    return render(request, 'adicionar_comentario.html', {'form': form, 'quadra': quadra})

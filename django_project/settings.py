@@ -29,7 +29,10 @@ LOGIN_URL = "/login"
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '.github.dev']
 
-CSRF_TRUSTED_ORIGINS = ["https://*.replit.dev", "https://*.replit.app"]
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'https://localhost:8000',
+]
 
 # Application definition
 
