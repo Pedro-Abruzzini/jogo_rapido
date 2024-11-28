@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Adicionar Comentário{% endblock %}
+
+{% block content %}
+<div class="adicionar-comentario-container">
+    <h2>Adicionar Comentário</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-button">Publicar</button>
+    </form>
+</div>
+{% endblock %}

@@ -13,7 +13,7 @@
             <p><strong>Valor:</strong> $$$</p>
             <p><strong>Funcionamento:</strong> seg-dom, 7:00-21:00</p>
             <p><strong>Avaliação:</strong> ★★★★★</p>
-            <button href="{% url 'adicionar_comentario' quadra.id %}"class="comentario-button">Adicionar comentário</button>
+            <a href="{% url 'adicionar_comentario' quadra.id %}" class="comentario-button">Adicionar comentário</a>
         </div>
         <div class="detalhes-image">
             <img src="{{ quadra.imagem }}" alt="Imagem da Quadra">

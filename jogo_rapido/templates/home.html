@@ -3,19 +3,42 @@
 {% block title %}Quadras Disponíveis{% endblock %}
 
 {% block content %}
-<div class="quadras-container">
-    <h2>Quadras Disponíveis</h2>
-    <div class="quadras-list">
-        {% for quadra in quadrasgeral %}
-        <a href="{% url 'detalhes_quadra' quadra.id %}" class="quadra-card">
-                <img src="{{ quadra.imagem }}" alt="Imagem da Quadra" class="quadra-img">
+<div class="home-container">
+    <!-- Coluna Esquerda: Quadras Disponíveis -->
+    <div class="quadras-container">
+        <h2>Quadras Disponíveis</h2>
+        <div class="quadras-list">
+            {% for quadra in quadrasgeral %}
+            <div class="quadra-card">
+                <a href="{% url 'detalhes_quadra' quadra.id %}">
+                    <img src="{{ quadra.imagem }}" alt="Imagem da Quadra" class="quadra-img">
+                </a>
                 <div class="quadra-info">
                     <p><strong>Modalidade:</strong> {{ quadra.esporte }}</p>
                     <p><strong>Localização:</strong> {{ quadra.localizacao }}</p>
                     <p><strong>Qualidade:</strong> {{ quadra.get_qualidade_display }}</p>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Coluna Direita: Comentários Recentes -->
+    <div class="comentarios-container">
+        <h2>Comentários Recentes</h2>
+        <div class="comentarios-list">
+            {% for comentario in comentarios %}
+            <div class="comentario-card">
+                <p><strong>{{ comentario.quadra.localizacao }}</strong> 
+                <div class="estrelas">
+                    {% for i in "12345"|slice:":comentario.estrelas" %}
+                    <span class="estrela">★</span>
+                    {% endfor %}
+                </div>
+                <p>{{ comentario.texto }}</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

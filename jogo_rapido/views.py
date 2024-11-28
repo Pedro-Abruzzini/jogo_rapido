@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .models import QuadraGeral, Item
+from .models import QuadraGeral, Item, Comentario
 from .forms import NovoUsuarioForm,ComentarioForm
 from django.http import JsonResponse
+
 
 
 
@@ -34,10 +35,11 @@ def login_usuario(request):
 
 
 
+
 def home(request):
     quadrasgeral = QuadraGeral.objects.all()
-    return render(request, 'home.html', context= {'quadrasgeral': quadrasgeral})
-        
+    comentarios = Comentario.objects.select_related('quadra').order_by('-data_criacao')[:5]  # Apenas os 5 mais recentes
+    return render(request, 'home.html', context={'quadrasgeral': quadrasgeral, 'comentarios': comentarios})
 
 def logout_usuario(request):
  logout(request)
@@ -98,3 +100,5 @@ def adicionar_comentario(request, quadra_id):
         form = ComentarioForm()
 
     return render(request, 'adicionar_comentario.html', {'form': form, 'quadra': quadra})
+
+
