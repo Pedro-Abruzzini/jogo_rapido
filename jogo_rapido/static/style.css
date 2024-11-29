@@ -277,3 +277,58 @@ body {
 .reservar-button:hover {
   background-color: #2e7d32;
 }
+
+.perfil {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  margin-left: 20px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.perfil h1 {
+  color: #2e7d32;
+  text-align: left;
+  font-size: 36px;
+  margin-left: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.favoritos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  text-align: left;
+  width: 100%;
+}
+
+.quadra-fav {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 300px;
+  text-align: left;
+  font-size: 18px;
+  width: 100%;
+}
+
+.quadra-fav img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.quadra-fav h3 {
+  color: #1e6d5c;
+  text-align: left;
+  font-size: 24px;
+  margin-left: 0;
+}
+
+.quadra-fav p {
+  font-size: 18px;
+  text-align: left;
+  margin-left: 0;
+}

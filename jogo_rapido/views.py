@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .models import QuadraGeral, Item
 from .forms import NovoUsuarioForm
 from django.http import JsonResponse
-
+from django.contrib.auth.decorators import login_required
 
 def inicio(request):
  return render(request, 'inicio.html')
@@ -75,3 +75,12 @@ def detalhes_quadra(request, quadra_id):
     except QuadraGeral.DoesNotExist:
         return redirect('home')  # Redireciona para a página inicial se a quadra não existir
     return render(request, 'detalhes_quadra.html', context={'quadra': quadra})
+
+def perfil(request):
+    user = request.user
+    if user.is_authenticated:
+        favoritos = user.quadra_set.all()
+    else:
+        favoritos = []
+
+    return render(request, 'perfil.html', {'favoritos': favoritos})
