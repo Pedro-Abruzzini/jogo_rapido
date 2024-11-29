@@ -1,37 +1,59 @@
 {% extends "base.html" %}
 
-{% block title %}{{ quadra.esporte }} - Detalhes{% endblock %}
+{% block title %}{{ quadra.localizacao }} - Detalhes{% endblock %}
 
 {% block content %}
 <div class="detalhes-quadra-container">
+    <!-- Informações principais da quadra -->
     <div class="detalhes-quadra">
         <div class="detalhes-info">
-            <h2>{{ quadra.localizacao }} <span>★★★★★</span></h2>
-            <p><strong>Modalidade:</strong> {{ quadra.esporte }}</p>
-            <p><strong>Localização:</strong> {{ quadra.localizacao }}</p>
-            <p><strong>Qualidade:</strong> {{ quadra.qualidade }}</p>
-            <p><strong>Valor:</strong> $$$</p>
-            <p><strong>Funcionamento:</strong> seg-dom, 7:00-21:00</p>
-            <p><strong>Avaliação:</strong> ★★★★★</p>
-            <a href="{% url 'adicionar_comentario' quadra.id %}" class="comentario-button">Adicionar comentário</a>
+            <h2 class="quadra-titulo">{{ quadra.localizacao }}</h2>
+            <ul class="detalhes-lista">
+                <li><strong>Modalidade:</strong> {{ quadra.esporte }}</li>
+                <li><strong>Localização:</strong> {{ quadra.localizacao }}</li>
+                <li><strong>Qualidade:</strong> {{ quadra.qualidade }}</li>
+                <li><strong>Preço por hora:</strong> <span class="preco">R$ {{ quadra.preco_por_hora }}</span></li>
+                <li><strong>Funcionamento:</strong> seg-dom, 7:00 - 21:00</li>
+                <li>
+                    <strong>Média de Avaliação:</strong> 
+                    <span class="estrelas">
+                        {% for _ in ""|center:media_estrelas|slice:":5" %}
+                        ★
+                        {% endfor %}
+                    </span>
+                    ({{ media_estrelas|floatformat:1 }} de 5)
+                </li>
+            </ul>
+            <a href="{% url 'adicionar_comentario' quadra.id %}" class="comentario-button">Adicionar Comentário</a>
         </div>
         <div class="detalhes-image">
             <img src="{{ quadra.imagem }}" alt="Imagem da Quadra">
         </div>
     </div>
+
+    <!-- Botão de reserva -->
     <div class="detalhes-actions">
-        <button class="reservar-button">Reservar agora</button>
+        <a href="{% url 'horarios_disponiveis' quadra.id %}" class="reservar-button">Reservar Agora</a>
     </div>
+
+    <!-- Comentários -->
     <div class="detalhes-comentarios">
-        <h3>Comentários</h3>
+        <h3 class="comentarios-titulo">Comentários</h3>
         {% for comentario in quadra.comentarios.all %}
-            <div class="comentario">
-                <p><strong>{{ comentario.autor.username }}</strong> - {{ comentario.data_criacao|date:"d/m/Y H:i" }}</p>
-                <p>{{ comentario.texto }}</p>
-                <p>Avaliação: {{ comentario.estrelas }} ★</p>
+        <div class="comentario">
+            <div class="comentario-header">
+                <span class="autor">{{ comentario.autor.username }}</span>
+                <span class="data">{{ comentario.data_criacao|date:"d/m/Y H:i" }}</span>
             </div>
+            <p class="comentario-texto">{{ comentario.texto }}</p>
+            <div class="comentario-estrelas">
+                {% for _ in ""|center:comentario.estrelas|slice:":5" %}
+                ★
+                {% endfor %}
+            </div>
+        </div>
         {% empty %}
-            <p>Sem comentários ainda. Seja o primeiro a comentar!</p>
+        <p class="sem-comentarios">Ainda não há comentários. Seja o primeiro a comentar!</p>
         {% endfor %}
     </div>
 </div>

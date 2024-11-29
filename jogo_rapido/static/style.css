@@ -230,80 +230,139 @@ body {
   cursor: pointer;
 }
 .detalhes-quadra-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .detalhes-quadra {
   display: flex;
-  justify-content: space-between;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 80%;
-  max-width: 1200px;
+  gap: 30px;
+  margin-bottom: 30px;
 }
 
 .detalhes-info {
-  flex: 1;
-  margin-right: 20px;
+  flex: 2;
 }
 
-.detalhes-info h2 {
-  font-size: 1.8em;
-  color: #3a5a40;
-  margin-bottom: 15px;
+.quadra-titulo {
+  font-size: 2em;
+  font-weight: bold;
+  color: #2e7d32;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #f0f4f8;
+  padding-bottom: 10px;
 }
 
-.detalhes-info p {
-  margin: 10px 0;
-  font-size: 1.2em;
+.detalhes-lista {
+  list-style-type: none;
+  padding: 0;
+}
+
+.detalhes-lista li {
+  font-size: 1.1em;
+  line-height: 1.8;
+  margin-bottom: 10px;
   color: #333;
 }
 
-.detalhes-info button {
-  padding: 10px 20px;
-  font-size: 1em;
-  color: white;
-  background-color: #3a5a40;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: background-color 0.3s;
-}
-
-.detalhes-info button:hover {
-  background-color: #2e7d32;
+.preco {
+  color: #d32f2f;
+  font-weight: bold;
 }
 
 .detalhes-image img {
+  flex: 1;
   width: 400px;
   height: 250px;
-  border-radius: 8px;
+  border-radius: 15px;
   object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .detalhes-actions {
+  text-align: center;
   margin-top: 20px;
 }
 
 .reservar-button {
-  padding: 15px 30px;
-  font-size: 1.2em;
+  padding: 15px 25px;
+  font-size: 1.3em;
+  font-weight: bold;
   color: white;
-  background-color: #3a5a40;
+  background-color: #2e7d32;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
 .reservar-button:hover {
-  background-color: #2e7d32;
+  background-color: #1e5d24;
+  transform: translateY(-3px);
+}
+
+.comentarios-titulo {
+  font-size: 1.8em;
+  color: #2e7d32;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f0f4f8;
+  padding-bottom: 10px;
+}
+
+.comentario {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.comentario:hover {
+  transform: translateY(-5px);
+}
+
+.comentario-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.autor {
+  font-weight: bold;
+  color: #3a5a40;
+}
+
+.data {
+  font-style: italic;
+  color: #888;
+}
+
+.comentario-texto {
+  font-size: 1.1em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.comentario-estrelas {
+  color: #f39c12;
+  font-size: 1.2em;
+}
+
+.sem-comentarios {
+  font-size: 1.2em;
+  color: #888;
+  text-align: center;
+  background-color: #fff3cd;
+  padding: 15px;
+  border-radius: 10px;
 }
 .detalhes-comentarios {
   margin-top: 20px;
@@ -363,5 +422,88 @@ body {
 }
 
 .submit-button:hover {
+  background-color: #2e7d32;
+}
+
+.horarios-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.horarios-container h2 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+.horarios-info {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.horarios-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.horario-item {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 250px;
+}
+
+.horario-texto {
+  font-size: 1.1em;
+  color: #333;
+}
+
+.reservar-horario-button {
+  padding: 10px 15px;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: white;
+  background-color: #2e7d32;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.reservar-horario-button:hover {
+  background-color: #1e5d24;
+}
+
+.voltar-detalhes {
+  margin-top: 20px;
+}
+
+.voltar-detalhes-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+  background-color: #3a5a40;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.voltar-detalhes-button:hover {
   background-color: #2e7d32;
 }

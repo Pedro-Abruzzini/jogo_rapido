@@ -29,6 +29,8 @@ urlpatterns = [
     path('add-to-favorites/<int:item_id>/', views.add_to_favorites, name='add_to_favorites'),
     path('quadra/<int:quadra_id>/', views.detalhes_quadra, name='detalhes_quadra'),
     path('quadra/<int:quadra_id>/adicionar_comentario/', views.adicionar_comentario, name='adicionar_comentario'),
+    path('quadra/<int:quadra_id>/horarios_disponiveis/', views.horarios_disponiveis, name='horarios_disponiveis'),
+    path('quadra/<int:quadra_id>/reservar/', views.reservar_horario, name='reservar_horario'),
 ]
 
 

@@ -16,6 +16,17 @@ class QuadraGeral (models.Model):
             ('MR', 'Muito ruim')
         ]
     )
+  preco_por_hora = models.DecimalField(max_digits=8, decimal_places=2, default=50.00)  # Preço por hora
+  horarios_disponiveis = models.JSONField(default=list)  # Lista de horários disponíveis como JSON
+  def calcular_media_estrelas(self):
+        comentarios = self.comentarios.all()
+        if comentarios.exists():
+            return sum(comentario.estrelas for comentario in comentarios) / comentarios.count()
+        return 0
+
+  def __str__(self):
+        return f"{self.localizacao} - {self.esporte}"
+
 
 class Item(models.Model):
     CATEGORY_CHOICES = [

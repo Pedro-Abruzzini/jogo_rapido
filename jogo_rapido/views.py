@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .models import QuadraGeral, Item, Comentario
 from .forms import NovoUsuarioForm,ComentarioForm
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+
 
 
 
@@ -73,8 +74,14 @@ def detalhes_quadra(request, quadra_id):
     try:
         quadra = QuadraGeral.objects.get(id=quadra_id)
     except QuadraGeral.DoesNotExist:
-        return redirect('home')  # Redireciona para a página inicial se a quadra não existir
-    return render(request, 'detalhes_quadra.html', context={'quadra': quadra})
+        return redirect('home')  # Redireciona para a home caso a quadra não exista
+
+    media_estrelas = quadra.calcular_media_estrelas()
+    return render(
+        request,
+        'detalhes_quadra.html',
+        context={'quadra': quadra, 'media_estrelas': media_estrelas}
+    )
 
 def favoritos(request):
     favoritos_ids = request.session.get('favorites', [])
@@ -101,4 +108,22 @@ def adicionar_comentario(request, quadra_id):
 
     return render(request, 'adicionar_comentario.html', {'form': form, 'quadra': quadra})
 
+
+
+def horarios_disponiveis(request, quadra_id):
+    # Busca a quadra pelo ID ou retorna um erro 404
+    quadra = get_object_or_404(QuadraGeral, id=quadra_id)
+    horarios = quadra.horarios_disponiveis  # Já é uma lista no JSONField
+
+    return render(request, 'horarios_disponiveis.html', {
+        'quadra': quadra,
+        'horarios': horarios  # Apenas passe a lista diretamente
+    })
+
+def reservar_horario(request, quadra_id):
+    if request.method == 'POST':
+        horario = request.POST.get('horario')
+        # Processar a reserva do horário aqui
+        return HttpResponse(f"Horário {horario} reservado com sucesso para a quadra {quadra_id}!")
+    return redirect('horarios_disponiveis', quadra_id=quadra_id)
 

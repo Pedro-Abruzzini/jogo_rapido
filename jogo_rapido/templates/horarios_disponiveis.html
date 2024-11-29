@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Horários Disponíveis - {{ quadra.localizacao }}{% endblock %}
+
+{% block content %}
+<div class="horarios-container">
+    <h2>Horários Disponíveis para {{ quadra.localizacao }}</h2>
+    <p class="horarios-info">
+        Escolha um horário para reservar esta quadra.
+    </p>
+
+    <div class="horarios-list">
+        {% for horario in horarios %}
+        <div class="horario-item">
+            <form method="post" action="{% url 'reservar_horario' quadra.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="horario" value="{{ horario }}">
+                <span class="horario-texto">{{ horario }}</span>
+                <button type="submit" class="reservar-horario-button">Reservar</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="voltar-detalhes">
+        <a href="{% url 'detalhes_quadra' quadra.id %}" class="voltar-detalhes-button">Voltar para Detalhes</a>
+    </div>
+</div>
+{% endblock %}

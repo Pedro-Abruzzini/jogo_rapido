@@ -16,7 +16,16 @@
                 <div class="quadra-info">
                     <p><strong>Modalidade:</strong> {{ quadra.esporte }}</p>
                     <p><strong>Localização:</strong> {{ quadra.localizacao }}</p>
-                    <p><strong>Qualidade:</strong> {{ quadra.get_qualidade_display }}</p>
+                    <p><strong>Média de Avaliação:</strong>
+                        <span class="estrelas">
+                            {% with quadra.calcular_media_estrelas as media_estrelas %}
+                            {% for _ in ""|center:media_estrelas|slice:":5" %}
+                            ★
+                            {% endfor %}
+                            ({{ media_estrelas|floatformat:1 }} de 5)
+                            {% endwith %}
+                        </span>
+                    </p>
                 </div>
             </div>
             {% endfor %}
