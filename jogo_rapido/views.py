@@ -31,7 +31,7 @@ def login_usuario(request):
     if formulario.is_valid():
         usuario = formulario.get_user()
         login(request, usuario)
-        return redirect('/')
+        return redirect(request.GET.get('next', '/perfil'))
  return render(request, 'login.html', {'formulario': formulario}) 
 
 
@@ -76,11 +76,7 @@ def detalhes_quadra(request, quadra_id):
         return redirect('home')  # Redireciona para a página inicial se a quadra não existir
     return render(request, 'detalhes_quadra.html', context={'quadra': quadra})
 
+@login_required
 def perfil(request):
-    user = request.user
-    if user.is_authenticated:
-        favoritos = user.quadra_set.all()
-    else:
-        favoritos = []
-
-    return render(request, 'perfil.html', {'favoritos': favoritos})
+    user = request.user 
+    return render(request, 'perfil.html', {'user': user})
