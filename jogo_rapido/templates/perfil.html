@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="perfil">
+      <h1>Bem-vindo, {{ user.first_name }}!</h1>
+      <p>Email: {{ user.email }}</p>
+
+      <h2>Meus Favoritos</h2>
+      <div class="favoritos">
+          {% for quadra in favoritos %}
+          <div class="quadra-fav">
+              <img src="{{ quadra.imagem.url }}" alt="{{ quadra.nome }}">
+              <h3>{{ quadra.modalidade }}</h3>
+              <p>Localização: {{ quadra.localizacao }}</p>
+              <p>Qualidade: {{ quadra.qualidade }}</p>
+              <a href="{% url 'detalhes_quadra' quadra.id %}">Ver detalhes</a>
+          </div>
+          {% empty %}
+          <p>Você não tem quadras favoritas ainda.</p>
+          {% endfor %}
+      </div>
+  </div>
+{% endblock %}

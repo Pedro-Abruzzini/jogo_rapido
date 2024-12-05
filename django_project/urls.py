@@ -31,6 +31,8 @@ urlpatterns = [
     path('quadra/<int:quadra_id>/adicionar_comentario/', views.adicionar_comentario, name='adicionar_comentario'),
     path('quadra/<int:quadra_id>/horarios_disponiveis/', views.horarios_disponiveis, name='horarios_disponiveis'),
     path('quadra/<int:quadra_id>/reservar/', views.reservar_horario, name='reservar_horario'),
+    path('perfil/', views.perfil, name='perfil'),
+]
 ]
 
 

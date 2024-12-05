@@ -2,12 +2,19 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+<<<<<<< HEAD
 from .models import QuadraGeral, Item, Comentario
 from .forms import NovoUsuarioForm,ComentarioForm
 from django.http import JsonResponse, HttpResponse
 
 
 
+=======
+from .models import QuadraGeral, Item
+from .forms import NovoUsuarioForm
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+>>>>>>> 5080390ec4697f140da91b6e4f912976220938df
 
 
 def cadastro_usuario(request):
@@ -31,7 +38,7 @@ def login_usuario(request):
     if formulario.is_valid():
         usuario = formulario.get_user()
         login(request, usuario)
-        return redirect('/')
+        return redirect(request.GET.get('next', '/perfil'))
  return render(request, 'login.html', {'formulario': formulario}) 
 
 
@@ -74,6 +81,7 @@ def detalhes_quadra(request, quadra_id):
     try:
         quadra = QuadraGeral.objects.get(id=quadra_id)
     except QuadraGeral.DoesNotExist:
+<<<<<<< HEAD
         return redirect('home')  # Redireciona para a home caso a quadra não exista
 
     media_estrelas = quadra.calcular_media_estrelas()
@@ -126,4 +134,5 @@ def reservar_horario(request, quadra_id):
         # Processar a reserva do horário aqui
         return HttpResponse(f"Horário {horario} reservado com sucesso para a quadra {quadra_id}!")
     return redirect('horarios_disponiveis', quadra_id=quadra_id)
+
 
