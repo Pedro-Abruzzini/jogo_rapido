@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Confirmar Reserva - {{ quadra.localizacao }}{% endblock %}
+
+{% block content %}
+<div class="reserva-container">
+    <h2>Confirmar Reserva para {{ quadra.localizacao }}</h2>
+    
+    <div class="reserva-details">
+        <p><strong>Horário selecionado:</strong> {{ horario }}</p>
+        <p><strong>Preço por hora:</strong> R$ {{ quadra.preco_por_hora }}</p>
+    </div>
+
+    <div class="payment-methods">
+        <h3>Escolha o método de pagamento:</h3>
+        <form method="POST" action="{% url 'finalizar_reserva' quadra.id %}">
+            {% csrf_token %}
+            <div class="payment-option">
+                <input type="radio" id="cartao" name="payment_method" value="cartao" required>
+                <label for="cartao">Cartão de Crédito</label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" id="boleto" name="payment_method" value="boleto" required>
+                <label for="boleto">Boleto Bancário</label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" id="pix" name="payment_method" value="pix" required>
+                <label for="pix">PIX</label>
+            </div>
+
+            <button type="submit" class="confirmar-reserva-button">Confirmar Reserva</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

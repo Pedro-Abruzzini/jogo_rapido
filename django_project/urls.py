@@ -32,6 +32,9 @@ urlpatterns = [
     path('quadra/<int:quadra_id>/horarios_disponiveis/', views.horarios_disponiveis, name='horarios_disponiveis'),
     path('quadra/<int:quadra_id>/reservar/', views.reservar_horario, name='reservar_horario'),
     path('perfil/', views.perfil, name='perfil'),
+    path('quadra/<int:quadra_id>/reservar/', views.reservar_horario, name='reservar_horario'),
+    path('quadra/<int:quadra_id>/reserva/', views.pagina_reserva, name='pagina_reserva'),
+    path('quadra/<int:quadra_id>/finalizar-reserva/', views.finalizar_reserva, name='finalizar_reserva'),
 ]
 ]
 
