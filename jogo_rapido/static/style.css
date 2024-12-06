@@ -143,6 +143,7 @@ body {
 
 .quadra-info {
   padding: 10px;
+  color: black
 }
 
 .comentarios-container {
@@ -284,26 +285,45 @@ body {
 }
 
 .detalhes-actions {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Espaçamento entre os botões */
   margin-top: 20px;
 }
 
 .reservar-button {
-  padding: 15px 25px;
-  font-size: 1.3em;
+  padding: 10px 20px;
+  font-size: 1em;
   font-weight: bold;
   color: white;
   background-color: #2e7d32;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.2s, background-color 0.3s;
 }
 
-.reservar-button:hover {
+.reservar-button:hover,
+.comentario-button:hover {
   background-color: #1e5d24;
   transform: translateY(-3px);
+}
+
+.favoritar-button {
+  padding: 10px;
+  font-size: 1.2em;
+  color: #2e7d32;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: transform 0.2s;
+}
+
+.favoritar-button:hover {
+  transform: scale(1.2);
+  color: #1e5d24;
 }
 
 .comentarios-titulo {

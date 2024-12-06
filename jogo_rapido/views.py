@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .models import QuadraGeral, Item, Comentario
+from .models import QuadraGeral, Item, Comentario, PerfilUsuario
 from .forms import NovoUsuarioForm,ComentarioForm
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -12,18 +12,15 @@ from django.contrib.auth.decorators import login_required
 
 
 def cadastro_usuario(request):
- formulario = NovoUsuarioForm()
- if request.method == 'POST' and request.POST:
-  formulario = NovoUsuarioForm(request.POST)
-  if formulario.is_valid():
-    novo_usuario = formulario.save(commit=False)
-    novo_usuario.email = formulario.cleaned_data['email']
-    novo_usuario.first_name = formulario.cleaned_data['first_name']
-    novo_usuario.last_name = formulario.cleaned_data['last_name']
-    novo_usuario.save()
-    return redirect('/login')
- return render(request, 'cadastro_usuario.html',
- {'formulario': formulario})
+    formulario = NovoUsuarioForm()
+    if request.method == 'POST':
+        formulario = NovoUsuarioForm(request.POST)
+        if formulario.is_valid():
+            novo_usuario = formulario.save()
+            tipo_usuario = formulario.cleaned_data['tipo_usuario']
+            PerfilUsuario.objects.create(usuario=novo_usuario, tipo_usuario=tipo_usuario)
+            return redirect('/login')
+    return render(request, 'cadastro_usuario.html', {'formulario': formulario})
   
 def login_usuario(request):
  formulario = AuthenticationForm()
@@ -60,16 +57,18 @@ def filter_items(request):
     return render(request, 'filter_page.html', {'items': items, 'selected_filter': filter_category})
 
 
-def add_to_favorites(request, item_id):
-    # Simulação de favoritos (pode ser alterado para um modelo real de favoritos)
-    item = Item.objects.get(id=item_id)
-    request.session.setdefault('favorites', [])
-    if item.name not in request.session['favorites']:
-        request.session['favorites'].append(item.name)
-        request.session.modified = True
+@login_required
+def add_to_favorites(request, quadra_id):
+    # Tenta encontrar a quadra pelo ID ou retorna um 404 se não existir
+    quadra = get_object_or_404(QuadraGeral, id=quadra_id)
 
-    # Redireciona de volta para a página de filtro
-    return redirect('filter_items')
+    # Adiciona ou remove a quadra dos favoritos do usuário logado
+    if quadra in request.user.perfil.quadras_favoritas.all():
+        request.user.perfil.quadras_favoritas.remove(quadra)
+    else:
+        request.user.perfil.quadras_favoritas.add(quadra)
+
+    return JsonResponse({'status': 'success'})
 
 def detalhes_quadra(request, quadra_id):
     try:
@@ -128,3 +127,12 @@ def reservar_horario(request, quadra_id):
         return HttpResponse(f"Horário {horario} reservado com sucesso para a quadra {quadra_id}!")
     return redirect('horarios_disponiveis', quadra_id=quadra_id)
 
+@login_required
+def toggle_favorito(request, quadra_id):
+    quadra = get_object_or_404(QuadraGeral, id=quadra_id)
+    perfil = request.user.perfil
+    if quadra in perfil.favoritos.all():
+        perfil.favoritos.remove(quadra)
+    else:
+        perfil.favoritos.add(quadra)
+    return redirect('detalhes_quadra', quadra_id=quadra.id)

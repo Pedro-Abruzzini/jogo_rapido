@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import QuadraGeral, Item, Comentario
+from .models import QuadraGeral, Item, Comentario, PerfilUsuario
 
 class QuadraGeralAdmin (admin.ModelAdmin):
   list_display = ['imagem','esporte', 'localizacao', 'qualidade']
@@ -15,3 +15,7 @@ admin.site.register(Comentario, ComentarioAdmin)
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('name', 'category')
     list_filter = ('category',)
+
+@admin.register(PerfilUsuario)
+class PerfilUsuarioAdmin(admin.ModelAdmin):
+    list_display = ('usuario', 'tipo_usuario')

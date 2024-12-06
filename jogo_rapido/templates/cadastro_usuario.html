@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Quadras Disponíveis{% endblock %}
+{% block title %}Cadastro de Usuário{% endblock %}
 
 {% block content %}
-<form method="POST">
+<form method="POST" class="cadastro-form">
   {% csrf_token %}
   {{ formulario.as_p }}
-  <button type="submit">Cadastrar</button>
+
+  <button type="submit" class="submit-button">Cadastrar</button>
 </form>
 {% endblock %}

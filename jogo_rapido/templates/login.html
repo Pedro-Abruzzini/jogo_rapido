@@ -1,13 +1,16 @@
 {% extends "base.html" %}
-
-{% block title %}Quadras Disponíveis{% endblock %}
+{% load static %}
 
 {% block content %}
-  <form method="POST">
-   {% csrf_token %}
-   {{ formulario }}
-   <button type="submit">Entrar</button>
+<div class="login-container">
+  <div class="login-logo-container">
+    <img src="{% static 'logojogorapido.png' %}" alt="Jogo Rápido Logo" class="login-logo">
+  </div>
+  <form method="POST" class="login-form">
+    {% csrf_token %}
+    {{ formulario.as_p }}
+    <button type="submit" class="login-button">Entrar</button>
   </form>
-<p>Não tem uma conta? <a href="/cadastro_usuario">Cadastre-se aqui</a></p> 
-
+  <p>Não tem uma conta? <a href="/cadastro_usuario">Cadastre-se aqui</a></p>
+</div>
 {% endblock %}

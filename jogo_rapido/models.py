@@ -49,3 +49,16 @@ class Comentario(models.Model):
 
     def __str__(self):
         return f"Comentário de {self.autor.username} - {self.quadra.localizacao} ({self.estrelas} estrelas)"
+    
+
+class PerfilUsuario(models.Model):
+    TIPOS_USUARIO = [
+        ('USUARIO', 'Usuário de Quadras'),
+        ('PROPRIETARIO', 'Proprietário de Quadras'),
+    ]
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
+    tipo_usuario = models.CharField(max_length=20, choices=TIPOS_USUARIO, default='USUARIO')
+    quadras_favoritas = models.ManyToManyField('QuadraGeral', blank=True, related_name='usuarios_favoritos')
+
+    def __str__(self):
+        return f"{self.usuario.username} - {self.get_tipo_usuario_display()}"

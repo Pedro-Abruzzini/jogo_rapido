@@ -24,16 +24,22 @@
                     ({{ media_estrelas|floatformat:1 }} de 5)
                 </li>
             </ul>
-            <a href="{% url 'adicionar_comentario' quadra.id %}" class="comentario-button">Adicionar Comentário</a>
         </div>
         <div class="detalhes-image">
             <img src="{{ quadra.imagem }}" alt="Imagem da Quadra">
         </div>
     </div>
 
-    <!-- Botão de reserva -->
+    <!-- Botões de Ação -->
     <div class="detalhes-actions">
         <a href="{% url 'horarios_disponiveis' quadra.id %}" class="reservar-button">Reservar Agora</a>
+        <a href="#" 
+           class="favoritar-button" 
+           data-id="{{ quadra.id }}" 
+           onclick="toggleFavorito(event, {{ quadra.id }})">
+           ❤️
+        </a>
+        <a href="{% url 'adicionar_comentario' quadra.id %}" class="reservar-button">Adicionar Comentário</a>
     </div>
 
     <!-- Comentários -->
@@ -57,4 +63,23 @@
         {% endfor %}
     </div>
 </div>
+
+<script>
+    function toggleFavorito(event, quadraId) {
+        event.preventDefault();
+        fetch(`/add-to-favorites/${quadraId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert("Quadra favorita atualizada!");
+            }
+        })
+        .catch(err => console.error(err));
+    }
+</script>
 {% endblock %}

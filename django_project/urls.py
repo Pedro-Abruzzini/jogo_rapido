@@ -23,16 +23,17 @@ from jogo_rapido import views
 urlpatterns = [
     path('', views.home),
     path('admin/', admin.site.urls),
-    path('login/', views.login_usuario),
-    path('cadastro_usuario/',views.cadastro_usuario),
+    path('login/', views.login_usuario, name='login'),
+    path('cadastro_usuario/', views.cadastro_usuario, name='cadastro_usuario'),
     path('filtro_items/', views.filter_items, name='filter_items'),  # Página principal com filtro
     path('add-to-favorites/<int:item_id>/', views.add_to_favorites, name='add_to_favorites'),
     path('quadra/<int:quadra_id>/', views.detalhes_quadra, name='detalhes_quadra'),
     path('quadra/<int:quadra_id>/adicionar_comentario/', views.adicionar_comentario, name='adicionar_comentario'),
     path('quadra/<int:quadra_id>/horarios_disponiveis/', views.horarios_disponiveis, name='horarios_disponiveis'),
     path('quadra/<int:quadra_id>/reservar/', views.reservar_horario, name='reservar_horario'),
-    path('perfil/', views.perfil, name='perfil'),
+    path('quadra/<int:quadra_id>/favoritar/', views.toggle_favorito, name='toggle_favorito'),
+    path('add-to-favorites/<int:quadra_id>/', views.add_to_favorites, name='add_to_favorites'),
 ]
-]
+
 
 
