@@ -6,7 +6,8 @@ from .models import QuadraGeral, Item, Comentario, PerfilUsuario
 from .forms import NovoUsuarioForm,ComentarioForm
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
-
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 
 
 
@@ -123,9 +124,20 @@ def horarios_disponiveis(request, quadra_id):
 def reservar_horario(request, quadra_id):
     if request.method == 'POST':
         horario = request.POST.get('horario')
-        # Processar a reserva do horário aqui
-        return HttpResponse(f"Horário {horario} reservado com sucesso para a quadra {quadra_id}!")
+        # Armazenar o horário selecionado na sessão
+        request.session['horario_reserva'] = horario
+        request.session['quadra_id'] = quadra_id
+        
+        # Redireciona para a página de reserva
+        return redirect('pagina_reserva', quadra_id=quadra_id)
+    
     return redirect('horarios_disponiveis', quadra_id=quadra_id)
+
+@login_required
+def perfil(request):
+    user = request.user
+    favoritos = user.quadra_set.all() 
+    return render(request, 'perfil.html', {'favoritos': favoritos})
 
 @login_required
 def toggle_favorito(request, quadra_id):
@@ -136,3 +148,32 @@ def toggle_favorito(request, quadra_id):
     else:
         perfil.favoritos.add(quadra)
     return redirect('detalhes_quadra', quadra_id=quadra.id)
+
+def perfil(request):
+    user = request.user
+    favoritos = user.quadra_set.all() 
+    return render(request, 'perfil.html', {'favoritos': favoritos})
+
+@login_required
+def pagina_reserva(request, quadra_id):
+    # Recupera o horário selecionado da sessão
+    horario_selecionado = request.session.get('horario_reserva')
+    quadra = get_object_or_404(QuadraGeral, id=quadra_id)
+
+    # Caso não tenha um horário selecionado, redireciona para a página de horários
+    if not horario_selecionado:
+        return redirect('horarios_disponiveis', quadra_id=quadra.id)
+
+    # Renderiza a página de reserva
+    return render(request, 'reserva.html', {
+        'quadra': quadra,
+        'horario': horario_selecionado
+    })
+
+from django.shortcuts import render
+
+def finalizar_reserva(request):
+    # Processamento para finalizar a reserva (salvar no banco, etc.)
+    return render(request, 'reserva_confirmada.html')
+
+

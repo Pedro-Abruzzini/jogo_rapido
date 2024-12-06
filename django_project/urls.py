@@ -31,8 +31,12 @@ urlpatterns = [
     path('quadra/<int:quadra_id>/adicionar_comentario/', views.adicionar_comentario, name='adicionar_comentario'),
     path('quadra/<int:quadra_id>/horarios_disponiveis/', views.horarios_disponiveis, name='horarios_disponiveis'),
     path('quadra/<int:quadra_id>/reservar/', views.reservar_horario, name='reservar_horario'),
+    path('quadra/<int:quadra_id>/reserva/', views.pagina_reserva, name='pagina_reserva'),
+    path('quadra/<int:quadra_id>/finalizar-reserva/', views.finalizar_reserva, name='finalizar_reserva'),
     path('quadra/<int:quadra_id>/favoritar/', views.toggle_favorito, name='toggle_favorito'),
     path('add-to-favorites/<int:quadra_id>/', views.add_to_favorites, name='add_to_favorites'),
+    path('perfil/', views.perfil, name='perfil'),
+]
 ]
 
 
