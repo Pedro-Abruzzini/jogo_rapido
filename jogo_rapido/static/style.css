@@ -613,7 +613,7 @@ body {
 }
 
 .confirmar-reserva-button {
-  background-color: #1a73e8;
+  background-color: #2e7d32;
   color: white;
   padding: 12px 24px;
   font-size: 1.1rem;
@@ -625,7 +625,7 @@ body {
 }
 
 .confirmar-reserva-button:hover {
-  background-color: #155cb0;
+  background-color: #2e7d32;
 }
 
 .reserva-image-container {
