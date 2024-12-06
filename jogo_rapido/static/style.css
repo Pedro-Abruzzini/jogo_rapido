@@ -562,3 +562,104 @@ body {
   text-align: left;
   margin-left: 0;
 }
+
+.reserva-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #f9f9f9;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.reserva-details {
+  width: 60%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-grow: 1;
+}
+
+.reserva-details h2 {
+  font-size: 2rem;
+  color: #1a73e8;
+  margin-bottom: 20px;
+}
+
+.reserva-details p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.payment-methods {
+  margin-top: 20px;
+}
+
+.payment-methods h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.payment-option {
+  margin-bottom: 10px;
+}
+
+.payment-option input[type="radio"] {
+  margin-right: 10px;
+}
+
+.confirmar-reserva-button {
+  background-color: #1a73e8;
+  color: white;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.confirmar-reserva-button:hover {
+  background-color: #155cb0;
+}
+
+.reserva-image-container {
+  width: 35%;
+  max-width: 500px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.reserva-image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .reserva-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+  }
+
+  .reserva-details {
+      width: 100%;
+      margin-bottom: 20px;
+  }
+
+  .reserva-image-container {
+      width: 100%;
+      margin-top: 20px;
+  }
+}
